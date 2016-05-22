@@ -34,6 +34,9 @@ package managers.core
 		
 		private static var deltaX:Number,deltaY:Number;
 		
+		/**You can store roots list here and make them manage x and y and scale automaticaly*/
+		private static var roots:Array; 
+		
 		public function ScreenManager()
 		{
 			super();
@@ -51,10 +54,12 @@ package managers.core
 		}
 
 		/**Seting up the screenManager.*/
-		public static function setUp(myStage:Stage,flashWidth:Number,flashHeight:Number,fakeDPI:Number=NaN):void
+		public static function setUp(myStage:Stage,flashWidth:Number,flashHeight:Number,fakeDPI:Number=NaN,rootsListToManageAutomaticly:Array=null):void
 		{
 			stage = myStage ;
 			stage.addEventListener(Event.RESIZE,stageResized);
+			
+			roots = rootsListToManageAutomaticly ;
 			
 			stage.scaleMode = StageScaleMode.NO_SCALE ;
 			stage.align = StageAlign.TOP_LEFT ;
@@ -85,6 +90,17 @@ package managers.core
 			
 			deltaX = _stageWidth-_flashW;
 			deltaY = _stageHeight-_flashH;
+			
+			if(roots)
+			{
+				for(var i:int = 0 ; i<roots.length ; i++)
+				{
+					trace("roots[i] : "+roots[i]);
+					roots[i].scaleX = roots[i].scaleY = scaleFactor ;
+					roots[i].x = deltaXOnScaleFactor();
+					roots[i].y = deltaYOnScaleFactor();
+				}
+			}
 			
 			eventDispatcher.dispatchEvent(new Event(Event.RESIZE));
 		}

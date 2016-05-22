@@ -2,6 +2,7 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	
@@ -30,20 +31,21 @@ package
 			starl.start();
 			
 			ScreenManager.eventDispatcher.addEventListener(Event.RESIZE,manageStageSize);
-			ScreenManager.setUp(stage,1024,768);
+			ScreenManager.setUp(stage,1024,768,NaN);
 			
+			stage.addEventListener(MouseEvent.MOUSE_DOWN,manageStageSize);
 		}
 		
 		
 		private function manageStageSize(e:Event):void
 		{
-			root.scaleX = testView.scaleY = ScreenManager.scaleFactor ;
 			if(true)
 			{
+				root.scaleX = testView.scaleY = ScreenManager.scaleFactor ;
 				root.x = ScreenManager.deltaXOnScaleFactor();
 				root.y = ScreenManager.deltaYOnScaleFactor();
 			}
-			else
+			else if(false)
 			{
 				testView.graphics.clear();
 				testView.graphics.beginFill(0xff0000,0.5);

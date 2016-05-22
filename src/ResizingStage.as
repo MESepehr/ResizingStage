@@ -39,10 +39,15 @@ package
 		
 		private function manageStageSize(e:Event):void
 		{
-			testView.scaleX = testView.scaleY = ScreenManager.scaleFactor ;
-			testView.x = ScreenManager.deltaXOnScaleFactor();
-			testView.y = ScreenManager.deltaYOnScaleFactor();
+			root.scaleX = testView.scaleY = ScreenManager.scaleFactor ;
+			//root.x = ScreenManager.deltaXOnScaleFactor();
+			//root.y = ScreenManager.deltaYOnScaleFactor();
 			text.text = ScreenManager.screenDPI.toString() ;
+			
+			testView.graphics.clear();
+			trace("ScreenManager.stageWidth : "+ScreenManager.stageWidth);
+			testView.graphics.beginFill(0xff0000);
+			testView.graphics.drawRoundRect(0,0,ScreenManager.stageWidthOnScale(),ScreenManager.stageHeightOnScale(),100);
 		}
 	}
 }

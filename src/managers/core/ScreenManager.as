@@ -24,8 +24,7 @@ package managers.core
 		/**Original stage widh and height will store here*/
 		private static var flashW:Number,flashH:Number;
 		
-		/**Real stage widh and height*/
-		private static var stageWidth:Number,stageHeight:Number;
+		private static var _stageWidth:Number,_stageHeight:Number;
 		
 		/**Stored screenDPI*/
 		private static var _screenDPI:Number ;
@@ -40,7 +39,7 @@ package managers.core
 		{
 			super();
 		}
-		
+
 		/**Seting up the screenManager.*/
 		public static function setUp(myStage:Stage,flashWidth:Number,flashHeight:Number,fakeDPI:Number=NaN):void
 		{
@@ -68,14 +67,14 @@ package managers.core
 		/**Stage resized. chane all of your variables*/
 		protected static function stageResized(event:Event):void
 		{
-			stageWidth = stage.stageWidth ;
-			stageHeight = stage.stageHeight ;
+			_stageWidth = stage.stageWidth ;
+			_stageHeight = stage.stageHeight ;
 			
-			scaleFactorX = stageWidth/flashW;
-			scaleFactorY = stageHeight/flashH;
+			scaleFactorX = _stageWidth/flashW;
+			scaleFactorY = _stageHeight/flashH;
 			
-			deltaX = stageWidth-flashW;
-			deltaY = stageHeight-flashH;
+			deltaX = _stageWidth-flashW;
+			deltaY = _stageHeight-flashH;
 			
 			eventDispatcher.dispatchEvent(new Event(Event.RESIZE));
 		}
@@ -129,13 +128,38 @@ package managers.core
 		/**Delta x based on resized object on scale factor*/
 		public static function deltaXOnScaleFactor():Number
 		{
-			return (stageWidth-flashW*scaleFactor)/2;
+			return (_stageWidth-flashW*scaleFactor)/2;
 		}
 		
 		/**Delta y based on resized object on scale factor*/
 		public static function deltaYOnScaleFactor():Number
 		{
-			return (stageHeight-flashH*scaleFactor)/2;
+			return (_stageHeight-flashH*scaleFactor)/2;
+		}
+		
+		
+		
+		
+		/**Real stage widh and height*/
+		public static function get stageHeight():Number
+		{
+			return _stageHeight;
+		}
+		
+		public static function stageHeightOnScale():Number
+		{
+			return _stageHeight/scaleFactor ;
+		}
+		
+		/**Real stage widh and height*/
+		public static function get stageWidth():Number
+		{
+			return _stageWidth;
+		}
+		
+		public static function stageWidthOnScale():Number
+		{
+			return _stageWidth/scaleFactor ;
 		}
 		
 		

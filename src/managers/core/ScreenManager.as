@@ -21,8 +21,7 @@ package managers.core
 		private static var stage:Stage ;
 		
 		
-		/**Original stage widh and height will store here*/
-		private static var flashW:Number,flashH:Number;
+		private static var _flashW:Number,_flashH:Number;
 		
 		private static var _stageWidth:Number,_stageHeight:Number;
 		
@@ -38,6 +37,17 @@ package managers.core
 		public function ScreenManager()
 		{
 			super();
+		}
+
+		public static function get flashH():Number
+		{
+			return _flashH;
+		}
+
+		/**Original stage widh and height will store here*/
+		public static function get flashW():Number
+		{
+			return _flashW;
 		}
 
 		/**Seting up the screenManager.*/
@@ -58,8 +68,8 @@ package managers.core
 				_screenDPI = fakeDPI ;
 			}
 			
-			flashW = flashWidth ;
-			flashH = flashHeight ;
+			_flashW = flashWidth ;
+			_flashH = flashHeight ;
 			
 			stageResized(null);
 		}
@@ -70,11 +80,11 @@ package managers.core
 			_stageWidth = stage.stageWidth ;
 			_stageHeight = stage.stageHeight ;
 			
-			scaleFactorX = _stageWidth/flashW;
-			scaleFactorY = _stageHeight/flashH;
+			scaleFactorX = _stageWidth/_flashW;
+			scaleFactorY = _stageHeight/_flashH;
 			
-			deltaX = _stageWidth-flashW;
-			deltaY = _stageHeight-flashH;
+			deltaX = _stageWidth-_flashW;
+			deltaY = _stageHeight-_flashH;
 			
 			eventDispatcher.dispatchEvent(new Event(Event.RESIZE));
 		}
@@ -128,13 +138,13 @@ package managers.core
 		/**Delta x based on resized object on scale factor*/
 		public static function deltaXOnScaleFactor():Number
 		{
-			return (_stageWidth-flashW*scaleFactor)/2;
+			return (_stageWidth-_flashW*scaleFactor)/2;
 		}
 		
 		/**Delta y based on resized object on scale factor*/
 		public static function deltaYOnScaleFactor():Number
 		{
-			return (_stageHeight-flashH*scaleFactor)/2;
+			return (_stageHeight-_flashH*scaleFactor)/2;
 		}
 		
 		
@@ -161,6 +171,8 @@ package managers.core
 		{
 			return _stageWidth/scaleFactor ;
 		}
+		
+		
 		
 		
 		

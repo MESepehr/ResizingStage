@@ -2,52 +2,57 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	
 	import managers.core.ScreenManager;
+	
+	import starling.core.Starling;
 	
 	[SWF(width="1024",height="768",frameRate="30",backgroundColor="#000")]
 	public class ResizingStage extends Sprite
 	{
 		private var testView:Sprite ; 
 		
-		private var text:TextField ;
+		
+		private var starl:Starling ;
 		
 		public function ResizingStage()
 		{
 			super();
 			
 			testView = new Sprite();
-			testView.graphics.beginFill(0xff0000);
+			testView.graphics.beginFill(0xff0000,0.5);
 			testView.graphics.drawRoundRect(0,0,1024,768,100);
 			this.addChild(testView);
 			
-			text = new TextField();
-			text.textColor = 0xffffff ;
-			this.addChild(text);
+			starl = new Starling(StarlingMain,stage);
+			starl.start();
 			
 			ScreenManager.eventDispatcher.addEventListener(Event.RESIZE,manageStageSize);
 			ScreenManager.setUp(stage,1024,768);
 			
 		}
 		
-		protected function oncliecked(event:Event):void
-		{
-			// TODO Auto-generated method stub
-			
-		}
 		
 		private function manageStageSize(e:Event):void
 		{
 			root.scaleX = testView.scaleY = ScreenManager.scaleFactor ;
-			//root.x = ScreenManager.deltaXOnScaleFactor();
-			//root.y = ScreenManager.deltaYOnScaleFactor();
-			text.text = ScreenManager.screenDPI.toString() ;
+			if(true)
+			{
+				root.x = ScreenManager.deltaXOnScaleFactor();
+				root.y = ScreenManager.deltaYOnScaleFactor();
+			}
+			else
+			{
+				testView.graphics.clear();
+				testView.graphics.beginFill(0xff0000,0.5);
+				testView.graphics.drawRoundRect(0,0,ScreenManager.stageWidthOnScale(),ScreenManager.stageHeightOnScale(),100);
+			}
 			
-			testView.graphics.clear();
-			trace("ScreenManager.stageWidth : "+ScreenManager.stageWidth);
-			testView.graphics.beginFill(0xff0000);
-			testView.graphics.drawRoundRect(0,0,ScreenManager.stageWidthOnScale(),ScreenManager.stageHeightOnScale(),100);
+			starl.viewPort = new Rectangle(0,0,ScreenManager.stageWidth,ScreenManager.stageHeight);
+			starl.stage.stageWidth = ScreenManager.stageWidth ;
+			starl.stage.stageHeight = ScreenManager.stageHeight ;
 		}
 	}
 }

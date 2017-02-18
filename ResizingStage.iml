@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="ResizingStage">
+    <configurations>
+      <configuration name="ResizingStage" target-platform="Desktop" pure-as="true" main-class="ResizingStage" output-file="ResizingStage.swf" output-folder="$MODULE_DIR$/bin-debug">
+        <dependencies>
+          <sdk name="4.6.0-Air23" />
+        </dependencies>
+        <compiler-options>
+          <map>
+            <entry key="compiler.locale" value="en_US" />
+          </map>
+        </compiler-options>
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/src/ResizingStage-app.xml" package-file-name="ResizingStage">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="D:/Git/ASPack/jp/shichiseki/exif/assets" path-in-package="jp/shichiseki/exif/assets" />
+          </files-to-package>
+        </packaging-air-desktop>
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://D:/Git/ASPack">
+      <sourceFolder url="file://D:/Git/ASPack" isTestSource="false" />
+    </content>
+    <content url="file://D:/Git/Starling-Framework/starling/src">
+      <sourceFolder url="file://D:/Git/Starling-Framework/starling/src" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="4.6.0-Air23" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
